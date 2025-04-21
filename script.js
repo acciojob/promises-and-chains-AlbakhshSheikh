@@ -38,7 +38,7 @@ document.getElementById('votingForm').addEventListener('submit', function (event
 
   // Validation for empty fields
   if (!name || !age) {
-    alert("Please enter valid details.");
+    alert("Please enter valid details");
     return;
   }
 
