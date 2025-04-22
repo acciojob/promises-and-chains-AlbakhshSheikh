@@ -13,7 +13,7 @@ form.addEventListener('submit', (event) => {
 
   // Validate inputs
   if (!name || isNaN(age)) {
-    alert('Please enter valid details.');
+    alert('Please enter valid details'); // Removed trailing period
     return;
   }
 
