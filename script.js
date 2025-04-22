@@ -1,63 +1,39 @@
-document.getElementById('votingForm').addEventListener('submit', function (event) {
+// Get form and input elements
+const form = document.getElementById('votingForm');
+const nameInput = document.getElementById('name');
+const ageInput = document.getElementById('age');
+
+// Add event listener for form submission
+form.addEventListener('submit', (event) => {
   event.preventDefault(); // Prevent default form submission
 
-  const name = document.getElementById('name').value.trim();
-  const age = document.getElementById('age').value.trim();
+  // Get input values and trim whitespace from name
+  const name = nameInput.value.trim();
+  const age = parseInt(ageInput.value);
 
-  // Validation for empty fields
-  if (!name || !age) {
-    alert("Please enter valid details.");
+  // Validate inputs
+  if (!name || isNaN(age)) {
+    alert('Please enter valid details.');
     return;
   }
 
-  // Convert age to a number
-  const numericAge = Number(age);
-
-  // Create a promise that resolves/rejects after 4 seconds
-  const checkEligibility = new Promise((resolve, reject) => {
+  // Create a promise to check voting eligibility
+  const votingPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (numericAge > 18) {
+      if (age > 18) {
         resolve(`Welcome, ${name}. You can vote.`);
       } else {
         reject(`Oh sorry ${name}. You aren't old enough.`);
       }
-    }, 4000);
+    }, 4000); // 4-second delay
   });
 
-  // Handle the promise outcome
-  checkEligibility
-    .then(message => alert(message))
-    .catch(errorMessage => alert(errorMessage));
-});
-//your JS code here. If required.
-document.getElementById('votingForm').addEventListener('submit', function (event) {
-  event.preventDefault(); // Prevent default form submission
-
-  const name = document.getElementById('name').value.trim();
-  const age = document.getElementById('age').value.trim();
-
-  // Validation for empty fields
-  if (!name || !age) {
-    alert("Please enter valid details");
-    return;
-  }
-
-  // Convert age to a number
-  const numericAge = Number(age);
-
-  // Create a promise that resolves/rejects after 4 seconds
-  const checkEligibility = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (numericAge > 18) {
-        resolve(`Welcome, ${name}. You can vote.`);
-      } else {
-        reject(`Oh sorry ${name}. You aren't old enough.`);
-      }
-    }, 4000);
-  });
-
-  // Handle the promise outcome
-  checkEligibility
-    .then(message => alert(message))
-    .catch(errorMessage => alert(errorMessage));
+  // Handle promise resolution or rejection
+  votingPromise
+    .then((message) => {
+      alert(message);
+    })
+    .catch((message) => {
+      alert(message);
+    });
 });
